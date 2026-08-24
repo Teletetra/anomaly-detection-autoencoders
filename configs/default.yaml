@@ -1,0 +1,39 @@
+seed: 42
+
+paths:
+  train: data/processed/train.npy
+  validation: data/processed/validation.npy
+  test: data/processed/test.npy
+  checkpoint: artifacts/checkpoints/best.pt
+
+run:
+  output_dir: artifacts/runs/default
+
+data:
+  sequence_length: 100
+  stride: 10
+  batch_size: 128
+  num_workers: 0
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  normalization: standard
+
+model:
+  type: lstm
+  input_size: 55
+  hidden_size: 128
+  latent_size: 64
+  num_layers: 2
+  dropout: 0.10
+  tcn_channels: 128
+
+training:
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  early_stopping_patience: 8
+  gradient_clip_norm: 1.0
+
+threshold:
+  method: percentile
+  percentile: 99.5
